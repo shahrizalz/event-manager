@@ -1,0 +1,18 @@
+{
+  "name": "event-manager",
+  "version": "1.0.0",
+  "description": "Forward a wedding/event invite (text or image), extract the details with an LLM, and add it to Google Calendar and/or Apple Calendar",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.21.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "googleapis": "^125.0.0",
+    "multer": "^2.0.1",
+    "openai": "^4.20.1"
+  }
+}

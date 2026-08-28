@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invite → Calendar</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Invite → Calendar</h1>
+    <p class="tagline">Paste or forward an invite, we put it on your calendar. Never miss another wedding.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <textarea id="text" rows="6" placeholder="Paste the invite text here... e.g. &quot;We invite you to celebrate Sarah & James on Saturday 14 June 2025 at 3 PM, Green Valley Hall, KL. Formal attire. RSVP by May 1st.&quot;"></textarea>
+      <label class="file-drop">
+        <input type="file" id="image" accept="image/*" />
+        <span id="file-name">+ Attach an invitation image (optional)</span>
+      </label>
+      <button id="parse-btn">Parse invite</button>
+      <p id="status" class="status"></p>
+    </section>
+
+    <section id="result" class="card hidden">
+      <h2>Review &amp; confirm</h2>
+      <div id="event-fields"></div>
+
+      <div class="actions">
+        <button id="add-google" class="primary">Add to Google Calendar</button>
+        <button id="apple-copy" class="secondary">Copy event for Apple Calendar</button>
+      </div>
+      <p id="google-status" class="status"></p>
+      <p class="hint" id="apple-hint" hidden>
+        Apple Calendar: copy the event, then run your iOS Shortcut (which also reads this page's clipboard and creates the event on your iPhone). See README.
+      </p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
