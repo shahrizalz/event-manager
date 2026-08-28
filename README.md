@@ -1,6 +1,6 @@
 # Invite → Calendar
 
-Forwards a wedding / event invite (text or image), extracts the details with an LLM, and adds it to
+Forwards a wedding / party / event invite (text or image), extracts the details with an LLM, and adds it to
 **Google Calendar** and/or **Apple Calendar** — so you never miss another event.
 
 ## How it works
