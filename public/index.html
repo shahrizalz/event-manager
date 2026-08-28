@@ -13,8 +13,27 @@
   </header>
 
   <main>
+    <details class="card howto" open>
+      <summary>How to use — tap to expand/collapse</summary>
+      <ol>
+        <li><strong>Get the invite</strong> — copy the invitation text, or save the poster/image from WhatsApp, Telegram, email, etc.</li>
+        <li><strong>Paste</strong> the text into the box below, and / or <strong>attach</strong> the invitation image.</li>
+        <li>Press <strong>Parse invite</strong> — the app reads it and fills in the event details for you.</li>
+        <li><strong>Review</strong> the details (title, date, time, place). Fix anything that looks wrong.</li>
+        <li>
+          <strong>Add it to your calendar:</strong>
+          <ul>
+            <li><strong>Google Calendar</strong> — press “Add to Google Calendar”. First time you’ll be asked to sign in to Google.</li>
+            <li><strong>Apple Calendar</strong> — press “Copy event for Apple Calendar”, then run your iOS Shortcut (which reads the copied event and saves it on your iPhone).</li>
+          </ul>
+        </li>
+      </ol>
+      <p class="hint">Tip: you can paste a plain invite as text, or attach a full poster image — both work, depending on the AI model in use.</p>
+    </details>
+
     <section class="card">
-      <textarea id="text" rows="6" placeholder="Paste the invite text here... e.g. &quot;We invite you to celebrate Sarah & James on Saturday 14 June 2025 at 3 PM, Green Valley Hall, KL. Formal attire. RSVP by May 1st.&quot;"></textarea>
+      <h2>Add your invite</h2>
+      <textarea id="text" rows="6" placeholder="Paste the invitation text here — e.g. “We invite you to celebrate Sarah & James on Saturday 14 June 2025 at 3 PM, Green Valley Hall, KL. Formal attire. RSVP by May 1st.”"></textarea>
       <label class="file-drop">
         <input type="file" id="image" accept="image/*" />
         <span id="file-name">+ Attach an invitation image (optional)</span>

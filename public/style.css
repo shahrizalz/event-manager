@@ -89,6 +89,25 @@ button.secondary { background: #111827; color: #fff; }
 
 .hint { color: #52606d; font-size: 13px; }
 
+details.howto {
+  background: #eef6ff;
+  border: 1px solid #d3e6ff;
+}
+details.howto summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  color: #1d4ed8;
+  outline: none;
+}
+details.howto ol,
+details.howto ul {
+  margin: 10px 0 0;
+  padding-left: 20px;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
 .spinner-wrap {
   display: flex;
   align-items: center;
