@@ -52,16 +52,22 @@
 
       <div class="actions">
         <button id="add-google" class="primary">Add to Google Calendar</button>
-        <button id="apple-copy" class="secondary">Copy event for Apple Calendar</button>
+        <button id="apple-download" class="secondary">Download for Apple Calendar</button>
       </div>
       <p id="google-status" class="status"></p>
       <div class="spinner-wrap hidden" id="google-spinner">
         <span class="spinner"></span>
         <span>Adding to your calendar…</span>
       </div>
-      <p class="hint" id="apple-hint" hidden>
-        Apple Calendar: copy the event, then run your iOS Shortcut (which also reads this page's clipboard and creates the event on your iPhone). See README.
-      </p>
+      <div id="apple-instructions" class="apple-box" hidden>
+        <h3>Add to Apple Calendar</h3>
+        <ol>
+          <li>Tap <strong>Open the .ics file</strong> below.</li>
+          <li>On the downloaded file, tap it (or AirDrop it to your iPhone if you’re on a Mac).</li>
+          <li>Choose <strong>Add to Calendar</strong> / <strong>Add All</strong> to save it.</li>
+        </ol>
+        <button id="open-ics" class="secondary">Open the .ics file</button>
+      </div>
     </section>
   </main>
 

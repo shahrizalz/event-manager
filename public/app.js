@@ -139,9 +139,14 @@ $('add-google').addEventListener('click', async () => {
   }
 });
 
-$('apple-copy').addEventListener('click', async () => {
+$('apple-download').addEventListener('click', async () => {
+  $('apple-instructions').hidden = !$('apple-instructions').hidden;
+  $('google-status').textContent = '';
+});
+
+$('open-ics').addEventListener('click', async () => {
   const event = readForm();
-  const data = {
+  const payload = {
     title: event.title,
     start: event.start,
     startTime: event.startTime,
@@ -149,14 +154,28 @@ $('apple-copy').addEventListener('click', async () => {
     endTime: event.endTime,
     location: event.location,
     note: event.note,
+    allDay: !!event.allDay,
   };
   try {
-    await navigator.clipboard.writeText(JSON.stringify(data));
-    $('apple-hint').hidden = false;
-    $('google-status').textContent = 'Event copied to clipboard.';
+    const res = await fetch('/api/ics', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ event: payload }),
+    });
+    if (!res.ok) throw new Error('Could not create the .ics file.');
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${(event.title || 'event').replace(/[^\w]+/g, '-')}.ics`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    $('google-status').textContent = 'Downloaded. Open it on your iPhone to add to Apple Calendar.';
     $('google-status').className = 'status ok';
   } catch (err) {
-    $('google-status').textContent = 'Could not copy.';
+    $('google-status').textContent = err.message;
     $('google-status').className = 'status err';
   }
 });

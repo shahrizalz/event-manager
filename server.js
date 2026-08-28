@@ -108,6 +108,55 @@ app.post('/api/events', async (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+function toIcsDateTime(date, time) {
+  const t = time || '09:00';
+  const [h, m] = t.split(':');
+  return `${date.replace(/-/g, '')}T${h}${m}00`;
+}
+
+function escapeIcs(text) {
+  return String(text || '')
+    .replace(/\\/g, '\\\\')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,')
+    .replace(/\r?\n/g, '\\n');
+}
+
+function buildIcs(event) {
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//InviteToCalendar//EN',
+    'BEGIN:VEVENT',
+    `UID:${Date.now()}@invitetocalendar`,
+    `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}`,
+  ];
+  if (event.allDay) {
+    lines.push(`DTSTART;VALUE=DATE:${event.start.replace(/-/g, '')}`);
+    if (event.end) lines.push(`DTEND;VALUE=DATE:${event.end.replace(/-/g, '')}`);
+  } else {
+    lines.push(`DTSTART:${toIcsDateTime(event.start, event.startTime)}`);
+    lines.push(`DTEND:${toIcsDateTime(event.end || event.start, event.endTime || event.startTime)}`);
+  }
+  lines.push(`SUMMARY:${escapeIcs(event.title)}`);
+  if (event.location) lines.push(`LOCATION:${escapeIcs(event.location)}`);
+  if (event.note) lines.push(`DESCRIPTION:${escapeIcs(event.note)}`);
+  lines.push('END:VEVENT', 'END:VCALENDAR');
+  return lines.join('\r\n');
+}
+
+app.post('/api/ics', express.json(), (req, res) => {
+  const event = req.body && req.body.event;
+  if (!event || !event.title || !event.start) {
+    return res.status(400).json({ error: 'Event with title and start is required.' });
+  }
+  const ics = buildIcs(event);
+  const filename = `${(event.title || 'event').replace(/[^\w]+/g, '-')}.ics`;
+  res.setHeader('Content-Type', 'text/calendar; charset=utf-8');
+  res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+  res.send(ics);
+});
+
 app.listen(config.port, () => {
   console.log(`Event Manager running at ${config.baseUrl}`);
   console.log(`LLM provider: ${config.llm.provider}`);

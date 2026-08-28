@@ -66,6 +66,23 @@ button {
 button.primary { background: #2563eb; color: #fff; }
 button.secondary { background: #111827; color: #fff; }
 
+.actions { display: flex; flex-direction: column; gap: 8px; }
+.actions button { margin-top: 0; }
+@media (min-width: 520px) {
+  .actions { flex-direction: row; }
+  .actions button { flex: 1; }
+}
+
+.apple-box {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid #d3dce6;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+.apple-box h3 { margin: 0 0 8px; font-size: 15px; }
+.apple-box ol { margin: 0 0 12px; padding-left: 18px; line-height: 1.6; font-size: 14px; }
+
 .status { color: #d97706; font-size: 14px; min-height: 18px; }
 .status.ok { color: #059669; }
 .status.err { color: #dc2626; }
