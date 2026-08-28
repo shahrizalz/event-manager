@@ -66,11 +66,12 @@ function addHour(hhmm) {
 function fieldRow(label, prop, type, hidden = false) {
   if (hidden) return '';
   const value = (current[prop] || '').replace(/"/g, '&quot;');
+  const isText = type === 'textarea' || type === 'text';
   return `
     <div class="row">
       <div class="label">${label}</div>
       <div class="value">
-        ${type === 'textarea'
+        ${isText
           ? `<textarea id="f-${prop}" rows="1" oninput="autoGrow(this)">${value}</textarea>`
           : `<input id="f-${prop}" type="${type}" value="${value}" />`}
       </div>
