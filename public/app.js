@@ -65,11 +65,21 @@ function addHour(hhmm) {
 
 function fieldRow(label, prop, type, hidden = false) {
   if (hidden) return '';
+  const value = (current[prop] || '').replace(/"/g, '&quot;');
   return `
     <div class="row">
       <div class="label">${label}</div>
-      <div class="value"><input id="f-${prop}" type="${type}" value="${(current[prop] || '').replace(/"/g, '&quot;')}" /></div>
+      <div class="value">
+        ${type === 'textarea'
+          ? `<textarea id="f-${prop}" rows="1" oninput="autoGrow(this)">${value}</textarea>`
+          : `<input id="f-${prop}" type="${type}" value="${value}" />`}
+      </div>
     </div>`;
+}
+
+function autoGrow(el) {
+  el.style.height = 'auto';
+  el.style.height = (el.scrollHeight + 2) + 'px';
 }
 
 function render() {
@@ -79,10 +89,11 @@ function render() {
     fieldRow('Start time', 'startTime', 'time') +
     fieldRow('End date', 'end', 'date', !current.end) +
     fieldRow('End time', 'endTime', 'time', !current.endTime) +
-    fieldRow('Location', 'location', 'text') +
-    fieldRow('Note', 'note', 'text');
+    fieldRow('Location', 'location', 'textarea') +
+    fieldRow('Note', 'note', 'textarea');
   $('result').classList.remove('hidden');
   $('status').textContent = '';
+  document.querySelectorAll('#event-fields textarea').forEach((t) => autoGrow(t));
 }
 
 function readForm() {

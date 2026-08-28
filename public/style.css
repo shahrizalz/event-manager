@@ -75,12 +75,16 @@ button.secondary { background: #111827; color: #fff; }
 #event-fields .row { display: flex; margin-bottom: 8px; }
 #event-fields .label { flex: 0 0 120px; color: #52606d; font-size: 14px; padding-top: 4px; }
 #event-fields .value { flex: 1; font-weight: 600; }
-#event-fields input {
+#event-fields input,
+#event-fields textarea {
   width: 100%;
   padding: 8px;
   border: 1px solid #d3dce6;
   border-radius: 8px;
   font-size: 15px;
+  font-family: inherit;
+  resize: none;
+  overflow: hidden;
 }
 
 .hint { color: #52606d; font-size: 13px; }
