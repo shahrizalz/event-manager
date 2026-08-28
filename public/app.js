@@ -63,7 +63,8 @@ function addHour(hhmm) {
   return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 }
 
-function fieldRow(label, prop, type) {
+function fieldRow(label, prop, type, hidden = false) {
+  if (hidden) return '';
   return `
     <div class="row">
       <div class="label">${label}</div>
@@ -76,8 +77,8 @@ function render() {
     fieldRow('Title', 'title', 'text') +
     fieldRow('Date', 'start', 'date') +
     fieldRow('Start time', 'startTime', 'time') +
-    fieldRow('End date', 'end', 'date') +
-    fieldRow('End time', 'endTime', 'time') +
+    fieldRow('End date', 'end', 'date', !current.end) +
+    fieldRow('End time', 'endTime', 'time', !current.endTime) +
     fieldRow('Location', 'location', 'text') +
     fieldRow('Note', 'note', 'text');
   $('result').classList.remove('hidden');
