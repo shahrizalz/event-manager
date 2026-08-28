@@ -70,7 +70,7 @@ button.secondary { background: #111827; color: #fff; }
 .status.ok { color: #059669; }
 .status.err { color: #dc2626; }
 
-.hidden { display: none; }
+.hidden { display: none !important; }
 
 #event-fields .row { display: flex; margin-bottom: 8px; }
 #event-fields .label { flex: 0 0 120px; color: #52606d; font-size: 14px; padding-top: 4px; }
