@@ -20,6 +20,10 @@
         <span id="file-name">+ Attach an invitation image (optional)</span>
       </label>
       <button id="parse-btn">Parse invite</button>
+      <div class="spinner-wrap hidden" id="parse-spinner">
+        <span class="spinner"></span>
+        <span>Reading your invite…</span>
+      </div>
       <p id="status" class="status"></p>
     </section>
 
@@ -32,6 +36,10 @@
         <button id="apple-copy" class="secondary">Copy event for Apple Calendar</button>
       </div>
       <p id="google-status" class="status"></p>
+      <div class="spinner-wrap hidden" id="google-spinner">
+        <span class="spinner"></span>
+        <span>Adding to your calendar…</span>
+      </div>
       <p class="hint" id="apple-hint" hidden>
         Apple Calendar: copy the event, then run your iOS Shortcut (which also reads this page's clipboard and creates the event on your iPhone). See README.
       </p>

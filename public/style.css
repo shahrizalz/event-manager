@@ -84,3 +84,32 @@ button.secondary { background: #111827; color: #fff; }
 }
 
 .hint { color: #52606d; font-size: 13px; }
+
+.spinner-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 14px 0 4px;
+  color: #128c7e;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(18, 140, 126, 0.25);
+  border-top-color: #128c7e;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

@@ -17,8 +17,10 @@ $('parse-btn').addEventListener('click', async () => {
     return;
   }
 
-  status.textContent = 'Parsing…';
-  status.className = 'status';
+  status.textContent = '';
+  const btn = $('parse-btn');
+  btn.disabled = true;
+  $('parse-spinner').classList.remove('hidden');
 
   const form = new FormData();
   if (text) form.append('text', text);
@@ -30,10 +32,12 @@ $('parse-btn').addEventListener('click', async () => {
     if (!res.ok) throw new Error(data.error || 'Parse failed');
     current = normalize(data);
     render();
-    status.textContent = '';
   } catch (err) {
     status.textContent = err.message;
     status.className = 'status err';
+  } finally {
+    btn.disabled = false;
+    $('parse-spinner').classList.add('hidden');
   }
 });
 
@@ -92,8 +96,10 @@ function readForm() {
 $('add-google').addEventListener('click', async () => {
   const el = $('google-status');
   const event = readForm();
-  el.textContent = 'Adding…';
-  el.className = 'status';
+  el.textContent = '';
+  const btn = $('add-google');
+  btn.disabled = true;
+  $('google-spinner').classList.remove('hidden');
   try {
     const res = await fetch('/api/events', {
       method: 'POST',
@@ -114,6 +120,9 @@ $('add-google').addEventListener('click', async () => {
   } catch (err) {
     el.textContent = err.message;
     el.className = 'status err';
+  } finally {
+    btn.disabled = false;
+    $('google-spinner').classList.add('hidden');
   }
 });
 
