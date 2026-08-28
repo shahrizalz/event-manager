@@ -13,7 +13,7 @@ module.exports = {
   llm: {
     // openai | anthropic | ollama | openai-compat
     provider: process.env.LLM_PROVIDER || 'openai-compat',
-    model: process.env.LLM_MODEL || '',
+    model: process.env.LLM_MODEL || 'qwen3.8-27b',
 
     // "openai" (OpenAI official) and "openai-compat" (any OpenAI-compatible
     // endpoint, e.g. NanoGPT, Groq, Together, OpenRouter) both use these:
